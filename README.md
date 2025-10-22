@@ -213,10 +213,10 @@ Añádelas en `res/drawable` como **Vector Asset**.
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/texto" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-
+```
 ## 9. Implementar la Navegación
 
-### 8.1 Navegación Onboarding1Fragment.java
+### 9.1 Navegación Onboarding1Fragment.java
 ```java
 public class Onboarding1Fragment extends Fragment {
 
@@ -240,4 +240,83 @@ public class Onboarding1Fragment extends Fragment {
         );
     }
 }
+```
+
+### 9.2 Navegación Onboarding1Fragment.java
+```java
+public class Onboarding2Fragment extends Fragment {
+
+    private FragmentOnboarding2Binding binding;
+    private NavController navController;
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return (binding = FragmentOnboarding2Binding.inflate(inflater, container, false)).getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        navController = Navigation.findNavController(view);
+
+        binding.botonFinalizar.setOnClickListener(v ->
+                navController.navigate(R.id.action_onboarding2Fragment_to_homeFragment)
+        );
+    }
+}
+```
+
+## 10 Añadir Animaciones
+
+### 10.1 Crear animaciones en res/anim/
+
+slide_in_right.xml
+
+```xml
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:fromXDelta="100%" android:toXDelta="0%" android:duration="700"/>
+</set>
+```
+
+slide_out_left.xml
+
+```xml
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:fromXDelta="0%" android:toXDelta="-100%" android:duration="700"/>
+</set>
+```
+slide_in_left.xml
+
+```xml
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:fromXDelta="-100%" android:toXDelta="0%" android:duration="700"/>
+</set>
+```
+slide_out_right.xml
+
+```xml
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate android:fromXDelta="0%" android:toXDelta="100%" android:duration="700"/>
+</set>
+```
+
+### 10.2 Asignar navegaciones en nav_graph.xml
+```xml
+<action
+    android:id="@+id/action_onboarding1Fragment_to_onboarding2Fragment"
+    app:destination="@id/onboarding2Fragment"
+    app:enterAnim="@anim/slide_in_right"
+    app:exitAnim="@anim/slide_out_left"
+    app:popEnterAnim="@anim/slide_in_left"
+    app:popExitAnim="@anim/slide_out_right"/>
+
+<action
+    android:id="@+id/action_onboarding2Fragment_to_homeFragment"
+    app:destination="@id/homeFragment"
+    app:enterAnim="@anim/slide_in_right"
+    app:exitAnim="@anim/slide_out_left"
+    app:popEnterAnim="@anim/slide_in_left"
+    app:popExitAnim="@anim/slide_out_right"/>
 ```
