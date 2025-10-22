@@ -1,0 +1,1 @@
+public class Onboarding2Fragment extends Fragment { ... }
