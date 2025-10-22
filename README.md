@@ -4,7 +4,7 @@
 **Objetivo de la práctica:**  
 Trabajar con **Fragments** y el componente **Navigation** para implementar un flujo de onboarding en una app Android.
 
-Repositorio de referencia: [Fragments GitHub](https://github.com/gerardfp/fragments)
+
 
 ---
 
@@ -111,8 +111,7 @@ Crea acciones de navegación:
 
 ### 8.1 Añadir las imágenes
 
-- `onboarding1.svg`  
-- `onboarding2.svg`  
+Añadid las imagenes para vuestras layout en drawable. 
 
 Añádelas en `res/drawable` como **Vector Asset**.
 
@@ -214,3 +213,31 @@ Añádelas en `res/drawable` como **Vector Asset**.
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/texto" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+## 9. Implementar la Navegación
+
+### 8.1 Navegación Onboarding1Fragment.java
+```java
+public class Onboarding1Fragment extends Fragment {
+
+    private FragmentOnboarding1Binding binding;
+    private NavController navController;
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return (binding = FragmentOnboarding1Binding.inflate(inflater, container, false)).getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        navController = Navigation.findNavController(view);
+
+        binding.botonSiguiente.setOnClickListener(v ->
+                navController.navigate(R.id.action_onboarding1Fragment_to_onboarding2Fragment)
+        );
+    }
+}
+```
