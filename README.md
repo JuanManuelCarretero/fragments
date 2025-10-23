@@ -54,7 +54,7 @@ dependencies {
 2. Nombre: `nav_graph`  
 3. Resource type: **Navigation** → OK
 
-[Gif](navegacion.gif)
+![Gif](navegacion.gif)
 ---
 
 ## 5. Añadir fragments al Navigation Graph
