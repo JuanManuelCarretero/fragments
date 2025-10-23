@@ -65,6 +65,7 @@ Crea los fragments:
 - `Onboarding2Fragment`  
 - `HomeFragment`  
 
+
 > `Onboarding1Fragment` será el **Start Destination**.
 
 ---
@@ -243,6 +244,40 @@ public class Onboarding1Fragment extends Fragment {
 }
 ```
 
+La version en kotlin
+
+```kotlin
+class Onboarding1Fragment : Fragment() {
+
+    private var _binding: FragmentOnboarding1Binding? = null
+    private val binding get() = _binding!!
+    private lateinit var navController: NavController
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentOnboarding1Binding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
+
+        binding.botonSiguiente.setOnClickListener {
+            navController.navigate(R.id.action_onboarding1Fragment_to_onboarding2Fragment)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
+```
+
 ### 9.2 Navegación Onboarding1Fragment.java
 ```java
 public class Onboarding2Fragment extends Fragment {
@@ -269,6 +304,41 @@ public class Onboarding2Fragment extends Fragment {
 }
 ```
 
+
+La version en kotlin
+
+
+```kotlin
+class Onboarding2Fragment : Fragment() {
+
+    private var _binding: FragmentOnboarding2Binding? = null
+    private val binding get() = _binding!!
+    private lateinit var navController: NavController
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentOnboarding2Binding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
+
+        binding.botonFinalizar.setOnClickListener {
+            navController.navigate(R.id.action_onboarding2Fragment_to_homeFragment)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
+```
 ## 10 Añadir Animaciones
 
 ### 10.1 Crear animaciones en res/anim/
